@@ -17,13 +17,23 @@ for file in os.listdir("strategies"):
 ## "s02" --> s02_always_defect.s02
 ## ...
 
-from core.match_history import match_history, score
-from simulation.round_robin import round_robin
-
+from core.match_history import match_history, score, match_history_with_noise
+from simulation.round_robin import round_robin, round_robin_with_noise
+from simulation.scoreboard import scoreboard
+from simulation.data_bcr import bcr_data
 
 
 print(match_history(strategies["s01"], strategies["s04"]))
+print(score(match_history(strategies["s03"], strategies["s04"])))
+print (score(match_history_with_noise(strategies["s03"], strategies["s04"], noise_prob=0.1)))
+print(match_history(strategies["s03"], strategies["s04"]))
+print(match_history_with_noise(strategies["s03"], strategies["s04"], noise_prob=0.1))
 
-print(score(match_history(strategies["s01"], strategies["s04"])))
+data = round_robin(strategies, rounds=200)
+data_noise = round_robin_with_noise(strategies, rounds=200, noise_prob=0.1)
+# print(data)
+print (scoreboard(data))
+# print(data_noise)
+print (scoreboard(data_noise))
 
-print(round_robin(strategies, rounds=200))
+print(bcr_data(rounds=2000, noise_prob=0.1, strategies=strategies, interval=20))

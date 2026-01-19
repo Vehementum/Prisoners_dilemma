@@ -1,5 +1,5 @@
 from random import random
-p = 0.9
+p = 0.7
 
 def s12(match_history):
     """Copies opponent's last move with probability p, defects randomly otherwise."""

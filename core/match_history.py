@@ -24,3 +24,14 @@ def score(match_history):
         r1 += r1_add
         r2 += r2_add
     return (r1, r2)
+
+def match_history_with_noise(strategy1, strategy2, rounds=200, noise_prob=0.1):
+    from interaction.noise import noise
+    match_history = []
+    for i in range(rounds):
+        move1 = strategy1(match_history)
+        move2 = strategy2(swap_history(match_history))
+        move1_noisy = noise(move1, noise_prob)
+        move2_noisy = noise(move2, noise_prob)
+        match_history.append((move1_noisy, move2_noisy))
+    return match_history
