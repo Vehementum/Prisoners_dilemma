@@ -40,7 +40,7 @@ Prisoners_dilemma/
 │
 ├── interaction/        # (Planned) interaction filtering / persistence
 │
-├── evolution/          # (Planned) population dynamics
+├── evolution/          # Population dynamics
 │
 ├── metrics/            # Score aggregation, rankings
 │
