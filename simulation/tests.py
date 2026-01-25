@@ -1,3 +1,5 @@
+################################################## Tests for the simulation module ##################################################
+
 import os
 import importlib
 strategies = {}
@@ -24,9 +26,9 @@ from simulation.scoreboard import scoreboard
 from simulation.data_bcr import bcr_data
 from evolution.next_gen import evolution_data, next_gen, create_strategies_pop
 
-duel = match_history(strategies["s03"], strategies["s15"])
-print(duel)
-print(score(duel))
+# duel = match_history(strategies["s03"], strategies["s15"])
+# print(duel)
+# print(score(duel))
 # print (score(match_history_with_noise(strategies["s03"], strategies["s04"], noise_prob=0.1)))
 # print(match_history(strategies["s03"], strategies["s04"]))
 # print(match_history_with_noise(strategies["s03"], strategies["s04"], noise_prob=0.1))

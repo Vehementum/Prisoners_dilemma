@@ -191,10 +191,18 @@ axelrod_first_fancy_names = [
     "Tullock"
 ]
 
-strategy_dict = {}
-for i in range(len(axelrod_first_fancy_names)):
-    strategy_dict[axelrod_first_fancy_names[i]] = axelrod_first_strategies[i]
-
-data = evolution_data_axelrod(strategy_dict, pop_size=100, generations=50, interval=1)
-plot_evolution(data)
 ############################### Evolution Data and Plotting using strategies in axelrod library ##############################
+
+strategy_dict_first_tournament = {}
+for i in range(len(axelrod_first_fancy_names)):
+    strategy_dict_first_tournament[axelrod_first_fancy_names[i]] = axelrod_first_strategies[i]
+
+# data = evolution_data_axelrod(strategy_dict_first_tournament, pop_size=100, generations=50, interval=1)
+# plot_evolution(data)
+
+strategy_dict_second_tournament = {}
+for i in range(len(axelrod_second_fancy_names)):
+    strategy_dict_second_tournament[axelrod_second_fancy_names[i]] = axelrod_second_tournament_strategies[i]
+
+data2 = evolution_data_axelrod(strategy_dict_second_tournament, pop_size=100, generations=50, interval=1)
+plot_evolution(data2)

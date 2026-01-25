@@ -1,15 +1,17 @@
-# Prisoner’s Dilemma — Strategy Dynamics Under Noise and Interaction
+# Prisoner’s Dilemma — A attempt at reproducing the findings in the official axelrod tournament and having a bit of fun along the way
 
 ## Overview
 
-This project implements and explores **Iterated Prisoner’s Dilemma tournaments** inspired by Robert Axelrod’s seminal work, with a focus on:
+This project implements and explores **Iterated Prisoner’s Dilemma tournaments** inspired by Robert Axelrod’s work, with a focus on:
 
-- Strategy diversity (cooperative, retaliatory, exploitative)
-- Robustness to **noise**
-- Emergent dynamics over time
-- Visualizing dominance and collapse of strategies
+- Implementing strategies
+- Visualizing the tournament results in the form of a racing bar chart
+- Implementing noise
+- Implementing evolution over time
+- Visualizing evolution over time in the form of a graph
 
-The goal is **not** to reuse an existing framework, but to **rebuild the core mechanisms from scratch** in a controlled, extensible way, enabling clear experimentation and interpretation.
+The goal is **not** to reuse an existing framework, but to **rebuild the core mechanisms from scratch** in a controlled, extensible way, enabling clear experimentation and interpretation. In the end, we imported the official strategies used in the axelrod tournament as we don't have the time nor ressources to implement the various complex
+strategies created by various researchers in the official tournaments.
 
 ---
 
@@ -28,6 +30,8 @@ The goal is **not** to reuse an existing framework, but to **rebuild the core me
 ## Project Structure
 ```
 Prisoners_dilemma/
+|
+├── axelrod_lib/        # enabling use of axelrod strategies in our code
 │
 ├── core/               # Core mechanics (match history, scoring)
 │
@@ -35,16 +39,18 @@ Prisoners_dilemma/
 │   ├── s01_*.py
 │   ├── s02_*.py
 │   └── ...
+|
+├── outputs/            # Outputs of the racing bar charts
 │
 ├── simulation/         # Round robin tournaments, aggregations
 │
 ├── interaction/        # (Planned) interaction filtering / persistence
 │
-├── evolution/          # Population dynamics
+├── evolution/          # Population dynamics over time
 │
 ├── metrics/            # Score aggregation, rankings
 │
-└── visualization/      # Plots, racing bar charts, outputs
+└── visualization/      # Plots, racing bar charts
 
 ````
 
@@ -143,8 +149,14 @@ This is a modeling and reasoning project first, not a benchmarking exercise.
 - pandas
 - matplotlib
 - bar_chart_race
+- axelrod
 
 ---
+
+## Implementations
+
+After installing all the necessary libraries, to run the code, run the command ```python -m folder_name/python_file```
+like so ```python -m visualization.data_rbc```
 
 ## Motivation
 
