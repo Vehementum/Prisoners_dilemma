@@ -6,8 +6,10 @@ import numpy as np
 from core.match_history import match_history_with_noise, score
 import os
 import importlib
-strategies = {}
 
+################################################## Creates the strategies dictionary from strategies folder ##############################
+
+strategies = {}
 def get_num(strategy_name):
     return int(strategy_name[1:3])
 for file in os.listdir("strategies"):
@@ -17,6 +19,8 @@ for file in os.listdir("strategies"):
         func_name = file[:3]
         function_object = getattr(module, func_name)
         strategies[func_name] = function_object
+
+############################################### Prisoners Dilemma Racing Bar Chart Data and Plotting using strategies in strategies folder ##############################
 
 # data = bcr_data(rounds=200, noise_prob=0, strategies=strategies, interval=2)
 # bcr.bar_chart_race(
@@ -43,97 +47,97 @@ for file in os.listdir("strategies"):
 #         ) 
 
 
-#################################################################################################################
-# from axelrod import (
-#     Random,
-#     TitForTat,
-#     SecondByAppold,
-#     SecondByBlack,
-#     SecondByBorufsen,
-#     SecondByCave,
-#     SecondByChampion,
-#     SecondByColbert,
-#     SecondByEatherley,
-#     SecondByGetzler,
-#     SecondByGladstein,
-#     SecondByGraaskampKatzen,
-#     SecondByGrofman,
-#     SecondByHarrington,
-#     SecondByKluepfel,
-#     SecondByLeyvraz,
-#     SecondByMikkelson,
-#     SecondByRichardHufford,
-#     SecondByRowsam,
-#     SecondByTester,
-#     SecondByTidemanAndChieruzzi,
-#     SecondByTranquilizer,
-#     SecondByWeiner,
-#     SecondByWhite,
-#     SecondByWmAdams,
-#     SecondByYamachi
-# )
-# axelrod_second_tournament_strategies = [
-#     # Baseline strategies used in the second tournament
-#     Random(),
-#     TitForTat(),
+############################# Imports strategies from the axelrod library (first and second tournaments) ###################################################
+from axelrod import (
+    Random,
+    TitForTat,
+    SecondByAppold,
+    SecondByBlack,
+    SecondByBorufsen,
+    SecondByCave,
+    SecondByChampion,
+    SecondByColbert,
+    SecondByEatherley,
+    SecondByGetzler,
+    SecondByGladstein,
+    SecondByGraaskampKatzen,
+    SecondByGrofman,
+    SecondByHarrington,
+    SecondByKluepfel,
+    SecondByLeyvraz,
+    SecondByMikkelson,
+    SecondByRichardHufford,
+    SecondByRowsam,
+    SecondByTester,
+    SecondByTidemanAndChieruzzi,
+    SecondByTranquilizer,
+    SecondByWeiner,
+    SecondByWhite,
+    SecondByWmAdams,
+    SecondByYamachi
+)
+axelrod_second_tournament_strategies = [
+    # Baseline strategies used in the second tournament
+    Random(),
+    TitForTat(),
     
-#     # Specific submissions to the second tournament
-#     SecondByAppold(),
-#     SecondByBlack(),
-#     SecondByBorufsen(),
-#     SecondByCave(),
-#     SecondByChampion(),
-#     SecondByColbert(),
-#     SecondByEatherley(),
-#     SecondByGetzler(),
-#     SecondByGladstein(),
-#     SecondByGraaskampKatzen(),
-#     SecondByGrofman(),
-#     SecondByHarrington(),
-#     SecondByKluepfel(),
-#     SecondByLeyvraz(),
-#     SecondByMikkelson(),
-#     SecondByRichardHufford(),
-#     SecondByRowsam(),
-#     SecondByTester(),
-#     SecondByTidemanAndChieruzzi(),
-#     SecondByTranquilizer(),
-#     SecondByWeiner(),
-#     SecondByWhite(),
-#     SecondByWmAdams(),
-#     SecondByYamachi()
-# ]
-# axelrod_second_fancy_names = [
-#     # Baseline strategies
-#     "Random",
-#     "Tit For Tat",
+    # Specific submissions to the second tournament
+    SecondByAppold(),
+    SecondByBlack(),
+    SecondByBorufsen(),
+    SecondByCave(),
+    SecondByChampion(),
+    SecondByColbert(),
+    SecondByEatherley(),
+    SecondByGetzler(),
+    SecondByGladstein(),
+    SecondByGraaskampKatzen(),
+    SecondByGrofman(),
+    SecondByHarrington(),
+    SecondByKluepfel(),
+    SecondByLeyvraz(),
+    SecondByMikkelson(),
+    SecondByRichardHufford(),
+    SecondByRowsam(),
+    SecondByTester(),
+    SecondByTidemanAndChieruzzi(),
+    SecondByTranquilizer(),
+    SecondByWeiner(),
+    SecondByWhite(),
+    SecondByWmAdams(),
+    SecondByYamachi()
+]
+axelrod_second_fancy_names = [
+    # Baseline strategies
+    "Random",
+    "Tit For Tat",
     
-#     # Specific submissions (Logic Mapping)
-#     "Appold"                    # A complex "Nice" strategy
-#     "Black",                    # A "Nice" variant
-#     "Borufsen",                 # A "Prober" / "Tester"
-#     "Cave",                     # A "Nice" strategy
-#     "Champion",                 # "The Statistical Prober"
-#     "Colbert",                  # A "Nasty" strategy
-#     "Eatherley",                # "The Doubler" (retaliates with increasing severity)
-#     "Getzler",                  # A "Nice" version of Tit For Tat
-#     "Gladstein",                # "The Tester"
-#     "Graaskamp & Katzen",       # "The Prober" (uses internal checks)
-#     "Grofman",                  # "The Random Cooperator" (2/7 probability)
-#     "Harrington",               # "The Genetic Explorer" (Uses long-range patterns)
-#     "Kluepfel",                 # A "Nice" strategy
-#     "Leyvraz",                  # A "Nasty" strategy
-#     "Mikkelson",                # A "Nice" strategy
-#     "Richard Hufford",          # A "Nice" strategy
-#     "Rowsam",                   # A "Nice" strategy
-#     "Tester",                   # "The Prober" (tests for Tit For Tat)
-#     "Tideman & Chieruzzi",      # "The Fresh Starter"
-#     "Tranquilizer",             # "The Sneaky Defector"
-#     "Weiner",                   # A "Nice" strategy
-#     "White",                    # A "Nice" strategy
-#     "Wm Adams",                 # A "Nice" strategy
-#     "Yamachi"                   # A "Nice" strategy
-# ]
+    # Specific submissions (Logic Mapping)
+    "Appold"                    # A complex "Nice" strategy
+    "Black",                    # A "Nice" variant
+    "Borufsen",                 # A "Prober" / "Tester"
+    "Cave",                     # A "Nice" strategy
+    "Champion",                 # "The Statistical Prober"
+    "Colbert",                  # A "Nasty" strategy
+    "Eatherley",                # "The Doubler" (retaliates with increasing severity)
+    "Getzler",                  # A "Nice" version of Tit For Tat
+    "Gladstein",                # "The Tester"
+    "Graaskamp & Katzen",       # "The Prober" (uses internal checks)
+    "Grofman",                  # "The Random Cooperator" (2/7 probability)
+    "Harrington",               # "The Genetic Explorer" (Uses long-range patterns)
+    "Kluepfel",                 # A "Nice" strategy
+    "Leyvraz",                  # A "Nasty" strategy
+    "Mikkelson",                # A "Nice" strategy
+    "Richard Hufford",          # A "Nice" strategy
+    "Rowsam",                   # A "Nice" strategy
+    "Tester",                   # "The Prober" (tests for Tit For Tat)
+    "Tideman & Chieruzzi",      # "The Fresh Starter"
+    "Tranquilizer",             # "The Sneaky Defector"
+    "Weiner",                   # A "Nice" strategy
+    "White",                    # A "Nice" strategy
+    "Wm Adams",                 # A "Nice" strategy
+    "Yamachi"                   # A "Nice" strategy
+]
 from axelrod import (
     Random,
     TitForTat,
@@ -185,6 +189,7 @@ axelrod_first_fancy_names = [
     "Tullock"
 ]
 
+############################## Prisoners Dilemma Racing Bar Chart Data and Plotting using strategies in axelrod library ######################################
 
 # data2 = bcr_data_axelrod(rounds=200, noise_prob=0, strategies=axelrod_first_strategies, strategies_names=axelrod_first_fancy_names, interval=4)
 # print(data2)

@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 
 def score_coeff(n):
+    """Returns the number of pairings of the same individuals in a population of size n."""
     return (n*(n-1)/2)
 
 def create_strategies_pop(strategies, pop_size):
@@ -15,7 +16,12 @@ def create_strategies_pop(strategies, pop_size):
 
 def next_gen(strategies_pop, interval=5):
     """Generates the next generation of strategies based on their scores and current population.
-     strategies: list of tuples (name, strategy_function, population)"""
+    Starts by resetting populations to 0 in the next_gen.
+    Then, adds the scores from strategy X against all other X strategies (there are score(n) encounters where n is the population of strategy X) to next_gen.
+    Then, adds the scores from strategy X against all other Y strategies (there are n*m encounters where n and m are the populations of strategies X and Y respectively) to next_gen.
+    Then normalizes the populations based on total scores to create the next generation.
+    Uses largest remainder method to ensure total population remains constant.
+    next_gen: list of tuples (name, strategy_function, population)"""
     next_generation = strategies_pop.copy()
     for i in range(len(next_generation)):
         next_generation[i] = (next_generation[i][0], next_generation[i][1], 0)  # Reset population counts to 0
@@ -48,8 +54,14 @@ def next_gen(strategies_pop, interval=5):
     return next_generation
 
 def next_gen_with_noise(strategies_pop, interval=5):
-    """Generates the next generation of strategies based on their scores and current population.
-     strategies: list of tuples (name, strategy_function, population)"""
+    """Same as next_gen but the matches are with noise :
+    Generates the next generation of strategies based on their scores and current population.
+    Starts by resetting populations to 0 in the next_gen.
+    Then, adds the scores from strategy X against all other X strategies (there are score(n) encounters where n is the population of strategy X) to next_gen.
+    Then, adds the scores from strategy X against all other Y strategies (there are n*m encounters where n and m are the populations of strategies X and Y respectively) to next_gen.
+    Then normalizes the populations based on total scores to create the next generation.
+    Uses largest remainder method to ensure total population remains constant.
+    next_gen: list of tuples (name, strategy_function, population)"""
     next_generation = strategies_pop.copy()
     for i in range(len(next_generation)):
         next_generation[i] = (next_generation[i][0], next_generation[i][1], 0)  # Reset population counts to 0

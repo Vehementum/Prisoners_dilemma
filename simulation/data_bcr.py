@@ -20,6 +20,8 @@ from axelrod import (
     )
 
 def bcr_data(rounds, noise_prob, strategies, interval=10):
+    """Generates the data for the racing bar chart.
+    strategies: dict of strategy_name: strategy_function"""
     data = {name: [] for name in strategies.keys()}
     for r in range(0, rounds + 1, interval):
         scores = {name: 0 for name in strategies.keys()}
@@ -99,9 +101,32 @@ def bcr_data_axelrod2(rounds, noise_prob, strategies, strategies_names, interval
     return df
 
 def final_scores_axelrod(data):
-    scores = {}
+    scores = []
     for col in data.columns:
-        scores[col] = data[col].iloc[-1]
+        # col is the name of the strategy
+        # .item() converts numpy types to native Python types (int/float)
+        last_score = data[col].iloc[-1].item()
+        scores.append((col, last_score))
+    scores.sort(key=lambda x: x[1], reverse=True)
+    return scores
+
+def print_scoreboard(scores):
+    print(f"{'Rank':<8} {'Strategy':<20} {'Score':<10}")
+    print("-" * 40)
+    
+    for i, (name, score) in enumerate(scores, start=1):
+        # Determine the suffix (st, nd, rd, or th)
+        if 11 <= i <= 13:
+            suffix = "th"
+        else:
+            suffix = {1: "st", 2: "nd", 3: "rd"}.get(i % 10, "th")
+        
+        rank_str = f"{i}{suffix}"
+        
+        # Print with aligned columns
+        print(f"{rank_str:<8} {name:<20} {score:<10}")
+    # Sort by the score (index 1 of the tuple) in descending order
+    scores.sort(key=lambda x: x[1], reverse=True)
     return scores
 
 

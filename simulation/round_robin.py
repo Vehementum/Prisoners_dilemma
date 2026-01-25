@@ -1,6 +1,7 @@
 from core.match_history import match_history, score
 
 def round_robin(strategies, rounds):
+    """Generates the round robin results for a set of strategies (all strategies play against each other)."""
     results = {}
     for keys in strategies.keys():
         results[keys] = 0
@@ -20,6 +21,7 @@ def round_robin(strategies, rounds):
 from core.match_history import match_history_with_noise
 
 def round_robin_with_noise(strategies, rounds, noise_prob):
+    """Generates the round robin results for a set of strategies (all strategies play against each other) with noise."""
     results = {}
     for keys in strategies.keys():
         results[keys] = 0

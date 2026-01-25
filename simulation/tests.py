@@ -3,6 +3,7 @@ import importlib
 strategies = {}
 
 def get_num(strategy_name):
+    """Helper function to extract the numeric part of the strategy name."""
     return int(strategy_name[1:3])
 for file in os.listdir("strategies"):
     if file.startswith("s") and file.endswith(".py") and file[1:3].isdigit() and get_num(file) <= 18:

@@ -1,6 +1,6 @@
 import bar_chart_race as bcr
 import pandas as pd
-from simulation.data_bcr import bcr_data, bcr_data_axelrod, bcr_data_axelrod2
+from simulation.data_bcr import bcr_data, bcr_data_axelrod, bcr_data_axelrod2, final_scores_axelrod, print_scoreboard
 import pandas as pd
 import numpy as np
 from core.match_history import match_history_with_noise, score
@@ -63,12 +63,12 @@ axelrod_first_fancy_names = [
 ]
 
 
-# data2 = bcr_data_axelrod(rounds=200, noise_prob=0, strategies=[TitForTat(), FirstByDavis()], strategies_names=["Tit For Tat", "Grudger"], interval=4)
+# data2 = bcr_data_axelrod(rounds=200, noise_prob=0, strategies=[TitForTat(), FirstByDavis()], strategies_names=["Tit For Tat", "Grudger"], interval=1)
 
 # bcr.bar_chart_race(
 #         df=data2,
 #         filename='output/prisoners_dilemma_axelrod_duel_tit_for_tat_vs_grudger.gif', 
-#         orientation='h', 
+#         orientation='h',
 #         sort='desc', 
 #         n_bars=8, 
 #         fixed_order=False, 
@@ -87,6 +87,7 @@ axelrod_first_fancy_names = [
 #         fig=None, 
 #         writer=None, 
 #         )
+
 
 # data3 = bcr_data_axelrod(rounds=200, noise_prob=0, strategies=[TitForTat(), FirstByJoss()], strategies_names=["Tit For Tat", "Joss"], interval=1)
 # print(data3)
@@ -282,47 +283,9 @@ axelrod_second_tournament_strategies = [
     SecondByWhite(),
     SecondByWmAdams(),
     SecondByYamachi(),
-    Adaptive(),
-    HardTitForTat(),
-    SoftJoss(),
-    Prober(),
-    Gradual(),
-    ContriteTitForTat(),
-    WinShiftLoseStay(),
-    BackStabber(),
-    SneakyTitForTat(),
-    ForgivingTitForTat(),
-    Aggravater(),
-    MetaHunter(),
-    MetaMajority(),
-    MetaMinority(),
-    AdaptiveTitForTat(),
-    Bully(),
-    Calculator(),
-    CautiousQLearner(),
-    EvolvedANN(),
-    Desperate(),
-    Detective(),
-    FoolMeOnce(),
-    HardProber(),
-    HardTitFor2Tats(),
-    Hopeless(),
-    Cycler(),
-    MetaWinner(),
-    NiceAverageCopier(),
-    Darwin(),
-    Michaelos(),
-    Thumper(),
-    ZDGTFT2(),
-    ZDExtort2(),
-    ZDSet2(),
-    Random(),
+    #Random(),
     TitForTat(),
-    TitFor2Tats(),
-    Defector(),
-    Cooperator(),
-    Predator(),
-
+    #TitFor2Tats(),
 ]
 
 
@@ -353,77 +316,18 @@ axelrod_second_fancy_names = [
     "White",
     "Wm Adams",
     "Yamachi",
-    "Adaptive",
-    "Hard Tit For Tat",
-    "SoftJoss",
-    "Prober",
-    "Gradual",
-    "ContriteTitForTat",
-    "WinShiftLoseStay",
-    "BackStabber",
-    "SneakyTitForTat",
-    "ForgivingTitForTat",
-    "Aggravater",
-    "MetaHunter",
-    "MetaMajority",
-    "MetaMinority",
-    "AdaptiveTitForTat",
-    "Bully",
-    "Calculator",
-    "CautiousQLearner",
-    "EvolvedANN",
-    "Desperate",
-    "Detective",
-    "FoolMeOnce",
-    "HardProber",
-    "HardTitFor2Tats",
-    "Hopeless",
-    "Cycler",
-    "MetaWinner",
-    "NiceAverageCopier",
-    "Darwin",
-    "Michaelos",
-    "Thumper",
-    "ZDGTFT2",
-    "ZDExtort2",
-    "ZDSet2",
     "Random",
     "TitForTat",
     "TitFor2Tats",
-    "Defector",
-    "Cooperator",
-    "Predator",
 
 ]
 
-# data6 = bcr_data_axelrod(rounds=200, noise_prob=0, strategies=axelrod_second_tournament_strategies, strategies_names=axelrod_second_fancy_names, interval=1)
-# bcr.bar_chart_race(
-#         df=data6,
-#         filename='output/prisoners_dilemma_axelrod_tournament_64.gif', 
-#         orientation='h', 
-#         sort='desc', 
-#         n_bars=8, 
-#         fixed_order=False, 
-#         fixed_max=True,
-#         steps_per_period=20, 
-#         period_length=500, 
-#         interpolate_period=False, 
-#         period_label={'x': .98, 'y': .3, 'ha': 'right', 'va': 'center'}, 
-#         period_summary_func=lambda v, r: {'x': .98, 'y': .2, 
-#                                           's': f'Total score: {v.sum():,.0f}', 
-#                                           'ha': 'right', 'size': 11}, 
-#         title='Prisoners Dilemma Strategies Scoreboard Over Time', 
-#         bar_size=.95, 
-#         shared_fontdict=None, 
-#         scale='linear', 
-#         fig=None, 
-#         writer=None, 
-#         )
-
-data7 = bcr_data_axelrod(rounds=200, noise_prob=0.1, strategies=axelrod_second_tournament_strategies, strategies_names=axelrod_second_fancy_names, interval=1)
+data6 = bcr_data_axelrod(rounds=200, noise_prob=0, strategies=axelrod_second_tournament_strategies, strategies_names=axelrod_second_fancy_names, interval=1)
+results = final_scores_axelrod(data6)
+print_scoreboard(results)
 bcr.bar_chart_race(
-        df=data7,
-        filename='output/prisoners_dilemma_axelrod_tournament_64_noise.gif', 
+        df=data6,
+        filename='output/prisoners_dilemma_axelrod_tournament_64.gif', 
         orientation='h', 
         sort='desc', 
         n_bars=8, 
@@ -443,3 +347,27 @@ bcr.bar_chart_race(
         fig=None, 
         writer=None, 
         )
+
+# data7 = bcr_data_axelrod(rounds=200, noise_prob=0.1, strategies=axelrod_second_tournament_strategies, strategies_names=axelrod_second_fancy_names, interval=1)
+# bcr.bar_chart_race(
+#         df=data7,
+#         filename='output/prisoners_dilemma_axelrod_tournament_64_noise.gif', 
+#         orientation='h', 
+#         sort='desc', 
+#         n_bars=8, 
+#         fixed_order=False, 
+#         fixed_max=True,
+#         steps_per_period=20, 
+#         period_length=500, 
+#         interpolate_period=False, 
+#         period_label={'x': .98, 'y': .3, 'ha': 'right', 'va': 'center'}, 
+#         period_summary_func=lambda v, r: {'x': .98, 'y': .2, 
+#                                           's': f'Total score: {v.sum():,.0f}', 
+#                                           'ha': 'right', 'size': 11}, 
+#         title='Prisoners Dilemma Strategies Scoreboard Over Time', 
+#         bar_size=.95, 
+#         shared_fontdict=None, 
+#         scale='linear', 
+#         fig=None, 
+#         writer=None, 
+#         )
