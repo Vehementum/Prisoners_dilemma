@@ -23,8 +23,9 @@ from simulation.scoreboard import scoreboard
 from simulation.data_bcr import bcr_data
 from evolution.next_gen import evolution_data, next_gen, create_strategies_pop
 
-# print(match_history(strategies["s01"], strategies["s04"]))
-# print(score(match_history(strategies["s03"], strategies["s04"])))
+duel = match_history(strategies["s03"], strategies["s15"])
+print(duel)
+print(score(duel))
 # print (score(match_history_with_noise(strategies["s03"], strategies["s04"], noise_prob=0.1)))
 # print(match_history(strategies["s03"], strategies["s04"]))
 # print(match_history_with_noise(strategies["s03"], strategies["s04"], noise_prob=0.1))
@@ -37,5 +38,5 @@ from evolution.next_gen import evolution_data, next_gen, create_strategies_pop
 # print (scoreboard(data_noise))
 
 # print(bcr_data(rounds=200, noise_prob=0, strategies=strategies, interval=2))
-print(create_strategies_pop(strategies, pop_size=100))
-print(evolution_data(strategies, pop_size=100, generations=10, interval=5))
+# print(create_strategies_pop(strategies, pop_size=100))
+# print(evolution_data(strategies, pop_size=100, generations=10, interval=5))

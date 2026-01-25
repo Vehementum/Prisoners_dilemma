@@ -21,6 +21,7 @@ for file in os.listdir("strategies"):
         strategies[func_name] = function_object
 
 data = evolution_data(strategies, pop_size=100, generations=100, interval=5)
+print(data)
 data2 = evolution_data_with_noise(strategies, pop_size=100, generations=100, interval=5)
 def plot_evolution(data):
     generations = len(data)
@@ -37,5 +38,5 @@ def plot_evolution(data):
     plt.legend()
     return plt.show()
 
-plot_evolution(data)
-plot_evolution(data2)
+# plot_evolution(data)
+# plot_evolution(data2)
